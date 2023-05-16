@@ -1,0 +1,7 @@
+package org.br.mineradora.proposta.exception;
+
+public class NotFoundException extends RuntimeException {
+    public NotFoundException(String message) {
+        super(message);
+    }
+}
