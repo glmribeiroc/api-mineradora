@@ -4,6 +4,7 @@ import org.br.mineradora.proposta.dto.ProposalDTO;
 import org.br.mineradora.proposta.dto.ProposalDetailsDTO;
 import org.br.mineradora.proposta.entity.ProposalEntity;
 import org.br.mineradora.proposta.exception.NotFoundException;
+import org.br.mineradora.proposta.message.KafkaEvents;
 import org.br.mineradora.proposta.repository.ProposalRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ public class ProposalServiceImpl implements ProposalService {
 
     private final ProposalRepository proposalRepository;
 
+    private final KafkaEvents kafkaEvents;
+
     @Override
     public ProposalDetailsDTO findByIdDTO(long id) {
         ProposalEntity proposal = proposalRepository.findById(id)
@@ -23,8 +26,8 @@ public class ProposalServiceImpl implements ProposalService {
     }
 
     public void createNewProposal(ProposalDetailsDTO proposalDetailsDTO) {
-        ProposalDTO proposal = buildAndSaveNewProposal(proposalDetailsDTO);
-
+        ProposalDTO proposalDTO = buildAndSaveNewProposal(proposalDetailsDTO);
+        kafkaEvents.sendNewKafkaEvent(proposalDTO);
     }
 
     private ProposalDTO buildAndSaveNewProposal(ProposalDetailsDTO proposalDetailsDTO) {
@@ -37,6 +40,11 @@ public class ProposalServiceImpl implements ProposalService {
                 .priceTonne(proposal.getPriceTonne())
                 .customer(proposal.getCustomer())
                 .build();
+    }
+
+    @Override
+    public void removeProposal(long id) {
+        proposalRepository.deleteById(id);
     }
 
 }

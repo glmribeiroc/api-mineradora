@@ -6,4 +6,8 @@ public interface ProposalService {
 
     ProposalDetailsDTO findByIdDTO(long id);
 
+    void createNewProposal(ProposalDetailsDTO proposalDetailsDTO);
+
+    void removeProposal(long id);
+
 }

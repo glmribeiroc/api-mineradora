@@ -5,9 +5,11 @@ import java.util.Date;
 
 import org.br.mineradora.proposta.entity.ProposalEntity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ProposalDetailsDTO {
     private Long proposalId;
     private String customer;
@@ -30,5 +32,11 @@ public class ProposalDetailsDTO {
     }
 
     public ProposalDetailsDTO(ProposalEntity proposal) {
+        this.proposalId = proposal.getId();
+        this.customer = proposal.getCustomer();
+        this.priceTonne = proposal.getPriceTonne();
+        this.tonnes = proposal.getTonnes();
+        this.country = proposal.getCountry();
+        this.proposalValidityDays = proposal.getProposalValidityDays();
     }
 }
