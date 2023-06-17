@@ -4,7 +4,7 @@ import org.br.mineradora.proposta.dto.ProposalDTO;
 import org.br.mineradora.proposta.dto.ProposalDetailsDTO;
 import org.br.mineradora.proposta.entity.ProposalEntity;
 import org.br.mineradora.proposta.exception.NotFoundException;
-import org.br.mineradora.proposta.message.KafkaEvents;
+import org.br.mineradora.proposta.kafka.KafkaEvents;
 import org.br.mineradora.proposta.repository.ProposalRepository;
 import org.springframework.stereotype.Service;
 

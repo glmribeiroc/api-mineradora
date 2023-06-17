@@ -1,4 +1,4 @@
-package org.br.mineradora.proposta.message;
+package org.br.mineradora.proposta.kafka;
 
 import org.br.mineradora.proposta.dto.ProposalDTO;
 import org.slf4j.Logger;
